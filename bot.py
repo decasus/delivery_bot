@@ -17,7 +17,7 @@ Base = declarative_base()
 
 # Модель для хранения настроек
 class Setting(Base):
-    __tablename__ = 'setting'
+    __tablename__ = 'Setting'
     id = Column(Integer, primary_key=True, autoincrement=True)
     key = Column(String, unique=True, nullable=False)
     value = Column(String, nullable=False)
@@ -49,11 +49,16 @@ def set_delivery_status(new_status: str) -> None:
             setting = Setting(key="DELIVERY_STATUS", value=new_status)
             session.add(setting)
         session.commit()
+        print(f"Статус обновлен на {new_status}")  # Логирование
+    except Exception as e:
+        print(f"Ошибка: {e}")  # Логирование ошибки
+        session.rollback()
+        raise
     finally:
         session.close()
 
 # --- Ограничение доступа для определённых chat_id ---
-ALLOWED_CHAT_IDS = {42542920, 316653210}
+ALLOWED_CHAT_IDS = {42542920}
 
 def restricted(func):
     def wrapper(update: Update, context: CallbackContext, *args, **kwargs):
