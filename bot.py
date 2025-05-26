@@ -58,7 +58,7 @@ def set_delivery_status(new_status: str) -> None:
         session.close()
 
 # --- Ограничение доступа для определённых chat_id ---
-ALLOWED_CHAT_IDS = {42542920, 316653210}
+ALLOWED_CHAT_IDS = {42542920, 316653210, 844067124}
 
 def restricted(func):
     def wrapper(update: Update, context: CallbackContext, *args, **kwargs):
