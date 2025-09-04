@@ -58,7 +58,7 @@ def set_delivery_status(new_status: str) -> None:
         session.close()
 
 # --- Ограничение доступа для определённых chat_id ---
-ALLOWED_CHAT_IDS = {42542920, 316653210, 844067124, 814417346}
+ALLOWED_CHAT_IDS = {42542920, 316653210, 844067124, 814417346, 636040475}
 
 def restricted(func):
     def wrapper(update: Update, context: CallbackContext, *args, **kwargs):
@@ -115,7 +115,7 @@ def main():
     TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
     if not TELEGRAM_TOKEN:
         raise ValueError("TELEGRAM_TOKEN не задан в переменных окружения")
-    
+
     updater = Updater(TELEGRAM_TOKEN, use_context=True)
     dp = updater.dispatcher
 
